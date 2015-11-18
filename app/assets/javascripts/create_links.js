@@ -22,10 +22,17 @@ function postData(){
   $.post('/links',
       formData(),
       function(data){
-        console.log(data);
-        $('#links').prepend(makeLink(data));
-        $('#title').val('');
-        $('#url').val('');
+        console.log(data.error);
+        if (data.error) {
+          $('#error').append(data.error);
+          $('#title').val('');
+          $('#url').val('');
+        } else {
+          $('#links').prepend(makeLink(data));
+          $('#title').val('');
+          $('#url').val('');
+          $('#error')[0].innerHTML = "";
+        }
       });
 }
 
