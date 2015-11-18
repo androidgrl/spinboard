@@ -18,8 +18,8 @@
   <% end %>
   <h1>Or Login</h1>
   <%= form_tag '/login' do %>
-    Email: <%= text_field_tag :email %></br>
-    Password: <%= password_field_tag :password %></br>
+    Login Email: <%= text_field_tag :email, nil, id: "login-email" %></br>
+    Login Password: <%= password_field_tag :password, nil, id: "login-password" %></br>
     <%= submit_tag "Login" %>
   <% end %>
 <% end %>

@@ -50,3 +50,16 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
 end
+
+def expect_user_to_be_signed_in(as:)
+  expect(page).not_to have_content("Signup")
+  expect(page).not_to have_content("Login")
+  expect(page).to have_content("Logout")
+  expect(page).to have_content(as)
+end
+
+def expect_user_to_be_logged_out
+  expect(page).not_to have_content("Logout")
+  expect(page).to have_content("Login")
+  expect(page).to have_content("Signup")
+end
