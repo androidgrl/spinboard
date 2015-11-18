@@ -2,7 +2,13 @@
 
 <% if current_user %>
   Welcome, <%= current_user.name %>
-<%= link_to "Logout", logout_path, method: :delete %>
+<%= link_to "Logout", logout_path, method: :delete %></br>
+<h3>Enter a new Link:</h3>
+<label for="Title">URL Title:</label>
+<input type="text" id="title"></br>
+<label for="Link">URL Link:</label>
+<input type="text" id="link"></br>
+<input type="submit" value="Save" id="save">
 <% else %>
   <h1>Signup!</h1>
   <%= form_for :user, url: '/signup' do |f| %>
