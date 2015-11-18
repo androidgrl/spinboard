@@ -20,16 +20,14 @@ describe "Welcome Page", :type => :feature do
   end
 
   it 'authenticated user can logout' do
-    User.create(name: "Jamie",
-                email: "jamie@gmail.com",
-                password: "password")
     visit root_path
+    fill_in "Name", with: "jamie"
+    fill_in "Email", with: "jamie@gmail.com"
+    fill_in "Password", with: "password"
+    fill_in "Password confirmation", with: "password"
+    click_on "Signup"
 
-    fill_in "login-email", with: "jamie@gmail.com"
-    fill_in "login-password", with: "password"
-    click_on "Login"
-
-    expect_user_to_be_signed_in(as: "Jamie")
+    expect_user_to_be_signed_in(as: "jamie")
 
     click_on "Logout"
 
