@@ -15,5 +15,6 @@ describe "Create Link", :type => :feature, :js => true do
     click_on "Save"
 
     expect(page).to have_content("Blink")
+    expect(page).to have_content("http://www.blink.com")
   end
 end
