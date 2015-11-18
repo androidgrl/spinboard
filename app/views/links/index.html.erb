@@ -7,7 +7,7 @@
 <label for="Title">Title:</label>
 <input type="text" id="title"></br>
 <label for="Link">Link:</label>
-<input type="text" id="link"></br>
+<input type="text" id="url"></br>
 <input type="submit" value="Save" id="save">
 <% else %>
   <h1>Signup!</h1>
@@ -33,6 +33,7 @@
 <% flash.each do |name, msg| %>
   <%= content_tag :div, msg, :id => "flash_#{name}" %>
 <% end %>
-<div id="links">
+<h3>Links:</h3>
+<ul id="links">
 
-</div>
+</ul>

@@ -6,8 +6,8 @@ class LinksController < ApplicationController
   end
 
   def create
-    link = Link.new(link_params)
-    render json: {title: link.title, body: link.body, read: link.read, id: link.id}
+    link = Link.create(link_params)
+    render json: {title: link.title, url: link.url, read: link.read, id: link.id}
   end
 
   private
