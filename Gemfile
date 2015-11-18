@@ -13,6 +13,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'validate_url'
 
 group :development, :test do
+  gem 'selenium-webdriver'
   gem 'database_cleaner'
   gem 'capybara'
   gem 'launchy'
