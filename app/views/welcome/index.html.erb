@@ -9,19 +9,23 @@
 <label for="Link">Link:</label>
 <input type="text" id="url"></br>
 <input type="submit" value="Save" id="save">
-<h3>Links:</h3>
-<label for="search">Search:</label>
-<input type="text" id="search"></br>
-<label for="filter">Filter:</label>
-<button id="filter-read">Read</button><button id="filter-unread">Unread</button></br>
-<label for="sort">Sort Alphabetically:</label>
-<button id="sort">Sort</button>
 <div id="error">
-
 </div>
-<ul id="links">
+<div class="row">
+  <div class="col-md-4" id="link-box">
+    <h3>Search Options:</h3>
+    <label for="search">Search:</label>
+    <input type="text" id="search"></br>
+    <label for="filter">Filter:</label>
+    <button id="filter-read">Read</button><button id="filter-unread">Unread</button></br>
+    <label for="sort">Sort Alphabetically:</label>
+    <button id="sort">Sort</button>
+    <h3>Links:</h3>
+    <ul id="links">
+    </ul>
+  </div>
+</div>
 
-</ul>
 <% else %>
   <h1>Signup!</h1>
   <%= form_for :user, url: '/signup' do |f| %>

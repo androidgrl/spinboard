@@ -1,0 +1,21 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+    background-color: blueviolet;
+    text-align: center;
+}
+
+ul {
+    list-style: none;
+}
+
+#link-box {
+    background-color: white;
+    margin-left: 300px;
+    text-align: left;
+}
+
+#error {
+    background-color: red;
+}
