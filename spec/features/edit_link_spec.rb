@@ -21,7 +21,7 @@ describe "Edit", :type => :feature, :js => true do
 
     click_on "Edit"
 
-    expect(page).to have_content("http://www.blink123.com")
+    expect(page).to have_content("http://bit.ly/1XaRhFP")
     expect(page).to have_content("Blink123")
   end
 end

@@ -15,7 +15,7 @@ describe "Create Link", :type => :feature, :js => true do
     click_on "Save"
 
     expect(page).to have_content("Blink")
-    expect(page).to have_content("http://www.blink.com")
+    expect(page).to have_content("http://bit.ly/1XaRhFP")
   end
 
   it "an invalid link will result in an error message" do
