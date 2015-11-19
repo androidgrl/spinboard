@@ -1,0 +1,40 @@
+<h1>Welcome to Spinboard!</h1>
+
+<% if current_user %>
+  Welcome, <%= current_user.name %>
+<%= link_to "Logout", logout_path, method: :delete %></br>
+<h3>Enter a new Link:</h3>
+<label for="Title">Title:</label>
+<input type="text" id="title"></br>
+<label for="Link">Link:</label>
+<input type="text" id="url"></br>
+<input type="submit" value="Save" id="save">
+<% else %>
+  <h1>Signup!</h1>
+  <%= form_for :user, url: '/signup' do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %></br>
+    <%= f.label :email %>
+    <%= f.text_field :email %></br>
+    <%= f.label :password %>
+    <%= f.password_field :password %></br>
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation %></br>
+    <%= f.submit "Signup" %>
+  <% end %>
+  <h1>Or Login</h1>
+  <%= form_tag '/login' do %>
+    Login Email: <%= text_field_tag :email, nil, id: "login-email" %></br>
+    Login Password: <%= password_field_tag :password, nil, id: "login-password" %></br>
+    <%= submit_tag "Login" %>
+  <% end %>
+<% end %>
+
+
+<h3>Links:</h3>
+<div id="error">
+
+</div>
+<ul id="links">
+
+</ul>
