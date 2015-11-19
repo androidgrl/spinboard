@@ -14,7 +14,7 @@ describe "Read", :type => :feature, :js => true do
     fill_in "url", with: "http://www.blink.com"
     click_on "Save"
 
-    expect(page).to have_link("Mark as Read")
+    expect(page).to have_button("Mark as Read")
   end
 
   it "the mark as read link changes the read attribute to true" do
@@ -30,7 +30,7 @@ describe "Read", :type => :feature, :js => true do
     click_on "Save"
     click_on "Mark as Read"
 
-    expect(page).to have_link("Mark as Unread")
+    expect(page).to have_button("Mark as Unread")
   end
 end
 
