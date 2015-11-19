@@ -27,15 +27,15 @@ class LinksController < ApplicationController
 
   def mark
     @link = Link.find(params[:id])
-    @link.read = true
-    @link.save
+    @link.update_attributes(read: true)
+    #@link.save
     respond_with @link
   end
 
   def unmark
     @link = Link.find(params[:id])
-    @link.read = false
-    @link.save
+    @link.update_attributes(read: false)
+    #@link.save
     respond_with @link
   end
 
