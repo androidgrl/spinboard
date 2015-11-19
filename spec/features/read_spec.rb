@@ -16,5 +16,21 @@ describe "Read", :type => :feature, :js => true do
 
     expect(page).to have_link("Mark as Read")
   end
+
+  it "the mark as read link changes the read attribute to true" do
+    visit root_path
+    fill_in "Name", with: "jamie"
+    fill_in "Email", with: "jamie@gmail.com"
+    fill_in "Password", with: "password"
+    fill_in "Password confirmation", with: "password"
+    click_on "Signup"
+
+    fill_in "title", with: "Blink"
+    fill_in "url", with: "http://www.blink.com"
+    click_on "Save"
+    click_on "Mark as Read"
+
+    expect(page).to have_link("Mark as Unread")
+  end
 end
 

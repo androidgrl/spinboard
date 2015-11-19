@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   post '/login' => 'sessions#create'
 
   resources :links
+
+  get '/mark/:id' => 'links#mark'
 end

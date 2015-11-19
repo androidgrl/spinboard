@@ -9,7 +9,7 @@ function formData(){
 }
 
 function makeLink(data){
-  var compiled = _.template("<div id='<%= id %>' class=link data-title='<%= title %>' data-url='<%= url %>' data-read='<%= read %>'><li>Title: <%= title %> </li><li>URL: <%= url %></li><li><a href='/mark'>Mark as Read</a></li></div></br>");
+  var compiled = _.template("<div id='<%= id %>' class=link data-title='<%= title %>' data-url='<%= url %>' data-read='<%= read %>'><li>Title: <%= title %> </li><li>URL: <%= url %></li><li><button class='mark' id='mark-<%= id %>'>Mark as Read</button></li></div></br>");
   var newIdea = compiled({'title': data.title,
     'url': data.url,
     'read': data.read,
@@ -36,6 +36,31 @@ function postData(){
       });
 }
 
+function markLink() {
+  console.log(this, 'this');
+  var id = this.id.substr(5);
+  console.log(id, "id");
+  $.ajax({
+      url: '/mark/' + id + '.json',
+      type: 'GET',
+      success: function (data) {
+        $('#mark-' + id).html("<strike>Mark as Unread</strike>");
+      }
+  });
+}
+
 $('document').ready(function(){
   $('#save').on('click', postData);
+  $('#links').delegate('.mark', 'click', markLink);
 });
+///////
+function upIdea () {
+    var id = this.id.substr(3);
+    $.ajax({
+        url: '/thumbs_up/' + id + '.json',
+        type: 'GET',
+        success: function (data) {
+            $('#quality-' + id).html("Quality: " + data.quality);
+        }
+    });
+}
