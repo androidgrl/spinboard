@@ -3,7 +3,6 @@ function filterRead() {
   links.each(function (index, link) {
     var $link = $(link);
     var read = $link.data('read');
-    console.log(read);
     if (read){
       $link.show();
     } else {
@@ -17,8 +16,7 @@ function filterUnread() {
   links.each(function (index, link) {
     var $link = $(link);
     var read = $link.data('read');
-    console.log(read);
-    if (read === false){
+    if (!read){
       $link.show();
     } else {
       $link.hide();
