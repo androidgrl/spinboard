@@ -17,8 +17,15 @@ class LinksController < ApplicationController
   def mark
     @link = Link.find(params[:id])
     @link.read = true
+    @link.save
     respond_with @link
-    #render json: {title: link.title, url: link.url, read: link.read, id: link.id}
+  end
+
+  def unmark
+    @link = Link.find(params[:id])
+    @link.read = false
+    @link.save
+    respond_with @link
   end
 
   private

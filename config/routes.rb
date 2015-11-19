@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   resources :links
 
   get '/mark/:id' => 'links#mark'
+  get '/unmark/:id' => 'links#unmark'
 end

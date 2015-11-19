@@ -37,7 +37,6 @@ function postData(){
 }
 
 function markLink() {
-  console.log(this, 'this');
   var id = this.id.substr(5);
   console.log(id, "id");
   $.ajax({
@@ -45,6 +44,22 @@ function markLink() {
       type: 'GET',
       success: function (data) {
         $('#mark-' + id).html("<strike>Mark as Unread</strike>");
+        $('#mark-' + id).addClass("unmark");
+        $('#mark-' + id).removeClass("mark");
+      }
+  });
+}
+
+function unmarkLink() {
+  var id = this.id.substr(5);
+  console.log(this, 'this and that');
+  $.ajax({
+      url: '/unmark/' + id + '.json',
+      type: 'GET',
+      success: function (data) {
+        $('#mark-' + id).html("Mark as Read");
+        $('#mark-' + id).addClass("mark");
+        $('#mark-' + id).removeClass("unmark");
       }
   });
 }
@@ -52,4 +67,5 @@ function markLink() {
 $('document').ready(function(){
   $('#save').on('click', postData);
   $('#links').delegate('.mark', 'click', markLink);
+  $('#links').delegate('.unmark', 'click', unmarkLink);
 });
