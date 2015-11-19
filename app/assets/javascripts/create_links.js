@@ -9,7 +9,7 @@ function formData(){
 }
 
 function makeLink(data){
-  var compiled = _.template("<div id='<%= id %>' class=link data-title='<%= title %>' data-url='<%= url %>' data-read='<%= read %>'><li>Title: <%= title %> </li><li>URL: <%= url %></li><li><button class='mark' id='mark-<%= id %>'>Mark as Read</button></li></div></br>");
+  var compiled = _.template("<div id='<%= id %>' class=link data-title='<%= title %>' data-url='<%= url %>' data-read='<%= read %>'><li>Title: <%= title %> </li><li>URL: <%= url %></li><li><button class='mark' id='mark-<%= id %>'>Mark as Read</button></li><li><button cliass='edit' id='edit-<%= id %>'>Edit</button></div></br>");
   var newIdea = compiled({'title': data.title,
     'url': data.url,
     'read': data.read,
