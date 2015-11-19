@@ -2,7 +2,8 @@ class LinksController < ApplicationController
   respond_to :json
 
   def index
-
+    @links = Link.all
+    respond_with @links
   end
 
   def create
@@ -12,6 +13,16 @@ class LinksController < ApplicationController
     else
       render json: {error: "Invalid URL"}
     end
+  end
+
+  def edit
+    @link = Link.find(params[:id])
+  end
+
+  def update
+    @link = Link.find(params[:id])
+    @link.update(link_params)
+    redirect_to root_path
   end
 
   def mark
