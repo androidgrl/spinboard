@@ -7,17 +7,25 @@ function formData(){
   };
 }
 
+function getBitly(func,data) {
+  $.getJSON("http://api.bitly.com/v3/shorten?login=o_1orkeh2ld7&apiKey=R_21a0df76ca6f43e4a3080c4bd3395409&longUrl=" + data.url, function (success) {
+    data.shortLink = success.data.url;
+    func(data);
+  });
+}
+
 function makeLink(data){
   var compiled;
   if (data.read) {
-    compiled = _.template("<div id='<%= id %>' class=link data-title='<%= title %>' data-url='<%= url %>' data-read='<%= read %>'><li>Title: <%= title %> </li><li>URL: <%= url %></li><li><button class='unmark' id='mark-<%= id %>'><strike>Mark as Unread</strike></button></li><li><a href='/links/<%= id %>/edit' id='edit-<%= id %>'>Edit</a></div></br>");
+    compiled = _.template("<div id='<%= id %>' class=link data-title='<%= title %>' data-url='<%= url %>' data-read='<%= read %>'><li>Title: <%= title %> </li><li>URL: <a href='<%= shortLink %>'><%= shortLink %></a></li><li><button class='unmark' id='mark-<%= id %>'><strike>Mark as Unread</strike></button></li><li><a href='/links/<%= id %>/edit' id='edit-<%= id %>'>Edit</a></div></br>");
   } else {
-    compiled = _.template("<div id='<%= id %>' class=link data-title='<%= title %>' data-url='<%= url %>' data-read='<%= read %>'><li>Title: <%= title %> </li><li>URL: <%= url %></li><li><button class='mark' id='mark-<%= id %>'>Mark as Read</button></li><li><a href='/links/<%= id %>/edit' id='edit-<%= id %>'>Edit</a></div></br>");
+    compiled = _.template("<div id='<%= id %>' class=link data-title='<%= title %>' data-url='<%= url %>' data-read='<%= read %>'><li>Title: <%= title %> </li><li>URL: <a href='<%= shortLink %>'><%= shortLink %></a></li><li><button class='mark' id='mark-<%= id %>'>Mark as Read</button></li><li><a href='/links/<%= id %>/edit' id='edit-<%= id %>'>Edit</a></div></br>");
   }
   var newIdea = compiled({'title': data.title,
     'url': data.url,
     'read': data.read,
-    'id': data.id
+    'id': data.id,
+    'shortLink': data.shortLink
   });
   return newIdea;
 }
@@ -31,7 +39,7 @@ function postData(){
           $('#title').val('');
           $('#url').val('');
         } else {
-          $('#links').prepend(makeLink(data));
+          getBitly(prependLink,data);
           $('#title').val('');
           $('#url').val('');
           $('#error')[0].innerHTML = "";
@@ -67,6 +75,10 @@ function unmarkLink() {
       $mark.removeClass("unmark");
     }
   });
+}
+
+function prependLink(link) {
+  $('#links').prepend(makeLink(link));
 }
 
 $('document').ready(function(){
