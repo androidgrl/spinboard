@@ -9,7 +9,7 @@ function formData(){
 }
 
 function makeLink(data){
-  var compiled = _.template("<div id='<%= id %>' class=link data-title='<%= title %>' data-url='<%= url %>' data-read='<%= read %>'><li>Title: <%= title %> </li><li>URL: <%= url %></li><li>Read: <%= read %></li></div></br>");
+  var compiled = _.template("<div id='<%= id %>' class=link data-title='<%= title %>' data-url='<%= url %>' data-read='<%= read %>'><li>Title: <%= title %> </li><li>URL: <%= url %></li><li><button class='mark' id='mark-<%= id %>'>Mark as Read</button></li></div></br>");
   var newIdea = compiled({'title': data.title,
     'url': data.url,
     'read': data.read,
@@ -36,6 +36,36 @@ function postData(){
       });
 }
 
+function markLink() {
+  var id = this.id.substr(5);
+  console.log(id, "id");
+  $.ajax({
+      url: '/mark/' + id + '.json',
+      type: 'GET',
+      success: function (data) {
+        $('#mark-' + id).html("<strike>Mark as Unread</strike>");
+        $('#mark-' + id).addClass("unmark");
+        $('#mark-' + id).removeClass("mark");
+      }
+  });
+}
+
+function unmarkLink() {
+  var id = this.id.substr(5);
+  console.log(this, 'this and that');
+  $.ajax({
+      url: '/unmark/' + id + '.json',
+      type: 'GET',
+      success: function (data) {
+        $('#mark-' + id).html("Mark as Read");
+        $('#mark-' + id).addClass("mark");
+        $('#mark-' + id).removeClass("unmark");
+      }
+  });
+}
+
 $('document').ready(function(){
   $('#save').on('click', postData);
+  $('#links').delegate('.mark', 'click', markLink);
+  $('#links').delegate('.unmark', 'click', unmarkLink);
 });

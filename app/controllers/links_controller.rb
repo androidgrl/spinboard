@@ -11,11 +11,21 @@ class LinksController < ApplicationController
       render json: {title: link.title, url: link.url, read: link.read, id: link.id}
     else
       render json: {error: "Invalid URL"}
-      #render.json { render json: link.errors, status: :unprocessable_entity }
-      #flash[:error] = "Invalid URL"
-      #puts "error"
-      #redirect_to root_path
     end
+  end
+
+  def mark
+    @link = Link.find(params[:id])
+    @link.read = true
+    @link.save
+    respond_with @link
+  end
+
+  def unmark
+    @link = Link.find(params[:id])
+    @link.read = false
+    @link.save
+    respond_with @link
   end
 
   private

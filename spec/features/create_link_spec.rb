@@ -30,6 +30,6 @@ describe "Create Link", :type => :feature, :js => true do
     fill_in "url", with: "blink.com"
     click_on "Save"
 
-    expect(page).to have_content("Invalid link")
+    expect(page).to have_content("Invalid URL")
   end
 end
