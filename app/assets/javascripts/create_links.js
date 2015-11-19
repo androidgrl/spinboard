@@ -8,7 +8,12 @@ function formData(){
 }
 
 function makeLink(data){
-  var compiled = _.template("<div id='<%= id %>' class=link data-title='<%= title %>' data-url='<%= url %>' data-read='<%= read %>'><li>Title: <%= title %> </li><li>URL: <%= url %></li><li><button class='mark' id='mark-<%= id %>'>Mark as Read</button></li><li><a href='/links/<%= id %>/edit' id='edit-<%= id %>'>Edit</a></div></br>");
+  var compiled;
+  if (data.read) {
+    compiled = _.template("<div id='<%= id %>' class=link data-title='<%= title %>' data-url='<%= url %>' data-read='<%= read %>'><li>Title: <%= title %> </li><li>URL: <%= url %></li><li><button class='unmark' id='mark-<%= id %>'><strike>Mark as Unread</strike></button></li><li><a href='/links/<%= id %>/edit' id='edit-<%= id %>'>Edit</a></div></br>");
+  } else {
+    compiled = _.template("<div id='<%= id %>' class=link data-title='<%= title %>' data-url='<%= url %>' data-read='<%= read %>'><li>Title: <%= title %> </li><li>URL: <%= url %></li><li><button class='mark' id='mark-<%= id %>'>Mark as Read</button></li><li><a href='/links/<%= id %>/edit' id='edit-<%= id %>'>Edit</a></div></br>");
+  }
   var newIdea = compiled({'title': data.title,
     'url': data.url,
     'read': data.read,
@@ -37,30 +42,30 @@ function postData(){
 function markLink() {
   var id = this.id.substr(5);
   $.ajax({
-      url: '/mark/' + id + '.json',
-      type: 'GET',
-      success: function (data) {
-        $("#" + id).attr("data-read",true);
-        var $mark = $('#mark-' + id);
-        $mark.html("<strike>Mark as Unread</strike>");
-        $mark.addClass("unmark");
-        $mark.removeClass("mark");
-      }
+    url: '/mark/' + id + '.json',
+    type: 'GET',
+    success: function (data) {
+      $("#" + id).attr("data-read",true);
+      var $mark = $('#mark-' + id);
+      $mark.html("<strike>Mark as Unread</strike>");
+      $mark.addClass("unmark");
+      $mark.removeClass("mark");
+    }
   });
 }
 
 function unmarkLink() {
   var id = this.id.substr(5);
   $.ajax({
-      url: '/unmark/' + id + '.json',
-      type: 'GET',
-      success: function (data) {
-        $("#" + id).attr("data-read",false);
-        var $mark = $('#mark-' + id);
-        $mark.html("Mark as Read");
-        $mark.addClass("mark");
-        $mark.removeClass("unmark");
-      }
+    url: '/unmark/' + id + '.json',
+    type: 'GET',
+    success: function (data) {
+      $("#" + id).attr("data-read",false);
+      var $mark = $('#mark-' + id);
+      $mark.html("Mark as Read");
+      $mark.addClass("mark");
+      $mark.removeClass("unmark");
+    }
   });
 }
 
