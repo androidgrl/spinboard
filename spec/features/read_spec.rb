@@ -28,7 +28,8 @@ describe "Read", :type => :feature, :js => true do
     fill_in "title", with: "Blink"
     fill_in "url", with: "http://www.blink.com"
     click_on "Save"
-    click_on "Mark as Read"
+    id = Link.last.id
+    click_on "mark-#{id}"
 
     expect(page).to have_button("Mark as Unread")
   end
@@ -44,7 +45,8 @@ describe "Read", :type => :feature, :js => true do
     fill_in "title", with: "Blink"
     fill_in "url", with: "http://www.blink.com"
     click_on "Save"
-    click_on "Mark as Read"
+    id = Link.last.id
+    click_on "mark-#{id}"
     click_on "Mark as Unread"
 
     expect(page).to have_button("Mark as Read")
