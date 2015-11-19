@@ -40,9 +40,11 @@ function markLink() {
       url: '/mark/' + id + '.json',
       type: 'GET',
       success: function (data) {
-        $('#mark-' + id).html("<strike>Mark as Unread</strike>");
-        $('#mark-' + id).addClass("unmark");
-        $('#mark-' + id).removeClass("mark");
+        $("#" + id).attr("data-read",true);
+        var $mark = $('#mark-' + id);
+        $mark.html("<strike>Mark as Unread</strike>");
+        $mark.addClass("unmark");
+        $mark.removeClass("mark");
       }
   });
 }
@@ -53,9 +55,11 @@ function unmarkLink() {
       url: '/unmark/' + id + '.json',
       type: 'GET',
       success: function (data) {
-        $('#mark-' + id).html("Mark as Read");
-        $('#mark-' + id).addClass("mark");
-        $('#mark-' + id).removeClass("unmark");
+        $("#" + id).attr("data-read",false);
+        var $mark = $('#mark-' + id);
+        $mark.html("Mark as Read");
+        $mark.addClass("mark");
+        $mark.removeClass("unmark");
       }
   });
 }
